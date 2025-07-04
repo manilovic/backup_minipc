@@ -23,10 +23,10 @@ if [ "$1" = "minipc" ]
 fi     
 
 
-rsync -a --delete Scripts/* 1-backup_"$maquina"/Scripts_backup/
+sudo rsync -a --delete docker 1-docker_"$maquina"
 
 
-cd 1-backup_"$maquina"/
+cd 1-docker_"$maquina"/
 
 git config --global user.email "juanma_fr@hotmail.com"
 git config --global user.name "manilovic"
@@ -39,6 +39,5 @@ sudo git commit -m "Commit $(date)"
 
 GIT_SSH_COMMAND="ssh -i /home/$maquina/.ssh/git -o StrictHostKeyChecking=no" git push --force origin master   ### Forzar si se ha tocado la nube
 
-
-echo "$(date '+%c') || git_update || Backup $maquina hecho ||" >> /home/minipc/LogsJM/monitor.txt
+echo "$(date '+%c') || git_update_docker || Backup docker $maquina hecho ||" >> /home/minipc/LogsJM/monitor.txt
 
