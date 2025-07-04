@@ -1,0 +1,63 @@
+mié 01 ene 2025 03:00:02 || images_containers || Actualizando containers ||
+mié 01 ene 2025 03:00:06 || images_containers || Imagenes descargadas ||
+mié 01 ene 2025 03:00:27 || images_containers || Disposotivo minipc ||
+mié 01 ene 2025 03:00:29 || images_containers || Creado stack homeassistant_nodered ||
+mié 01 ene 2025 03:01:34 || SSH_containers || Node-Red hecho ||
+mié 01 ene 2025 03:01:37 || SSH_containers || Homeassistant hecho ||
+mié 15 ene 2025 03:00:02 || images_containers || Actualizando containers ||
+mié 15 ene 2025 03:01:19 || images_containers || Imagenes descargadas ||
+mié 15 ene 2025 03:01:46 || images_containers || Disposotivo minipc ||
+mié 15 ene 2025 03:01:48 || images_containers || Creado stack homeassistant_nodered ||
+mié 15 ene 2025 03:02:52 || SSH_containers || Node-Red hecho ||
+mié 15 ene 2025 03:02:56 || SSH_containers || Homeassistant hecho ||
+sáb 01 feb 2025 03:00:02 || images_containers || Actualizando containers ||
+sáb 01 feb 2025 03:01:12 || images_containers || Imagenes descargadas ||
+sáb 01 feb 2025 03:01:37 || images_containers || Disposotivo minipc ||
+sáb 01 feb 2025 03:01:39 || images_containers || Creado stack homeassistant_nodered ||
+sáb 01 feb 2025 03:02:49 || SSH_containers || Node-Red hecho ||
+sáb 01 feb 2025 03:02:53 || SSH_containers || Homeassistant hecho ||
+sáb 15 feb 2025 03:00:02 || images_containers || Actualizando containers ||
+sáb 15 feb 2025 03:01:25 || images_containers || Imagenes descargadas ||
+sáb 15 feb 2025 03:01:59 || images_containers || Disposotivo minipc ||
+sáb 15 feb 2025 03:02:01 || images_containers || Creado stack homeassistant_nodered ||
+sáb 15 feb 2025 03:03:18 || SSH_containers || Node-Red hecho ||
+sáb 15 feb 2025 03:03:25 || SSH_containers || Homeassistant hecho ||
+sáb 01 mar 2025 03:00:01 || images_containers || Actualizando containers ||
+sáb 01 mar 2025 03:02:54 || images_containers || Imagenes descargadas ||
+sáb 01 mar 2025 03:03:26 || images_containers || Disposotivo minipc ||
+sáb 01 mar 2025 03:03:27 || images_containers || Creado stack homeassistant_nodered ||
+sáb 01 mar 2025 03:04:46 || SSH_containers || Node-Red hecho ||
+sáb 01 mar 2025 03:04:49 || SSH_containers || Homeassistant hecho ||
+lun 10 mar 2025 00:25:18 || SSH_containers || Node-Red hecho ||
+lun 10 mar 2025 00:25:24 || SSH_containers || Homeassistant hecho ||
+lun 10 mar 2025 00:34:28 || images_containers || Actualizando containers ||
+lun 10 mar 2025 00:35:35 || images_containers || Imagenes descargadas ||
+lun 10 mar 2025 00:36:00 || images_containers || Disposotivo minipc ||
+lun 10 mar 2025 00:36:02 || images_containers || Creado stack homeassistant_nodered ||
+lun 10 mar 2025 00:44:17 || SSH_containers || Node-Red hecho ||
+lun 10 mar 2025 01:52:10 || SSH_containers || Node-Red hecho ||
+lun 10 mar 2025 01:52:13 || SSH_containers || Homeassistant hecho ||
+sáb 15 mar 2025 03:00:02 || images_containers || Actualizando containers ||
+sáb 15 mar 2025 03:01:26 || images_containers || Imagenes descargadas ||
+sáb 15 mar 2025 03:01:59 || images_containers || Disposotivo minipc ||
+sáb 15 mar 2025 03:02:00 || images_containers || Creado stack homeassistant_nodered ||
+sáb 15 mar 2025 03:03:10 || SSH_containers || Node-Red hecho ||
+sáb 15 mar 2025 03:03:16 || SSH_containers || Homeassistant hecho ||
+mar 01 abr 2025 03:00:02 || images_containers || Actualizando containers ||
+mar 01 abr 2025 03:01:25 || images_containers || Imagenes descargadas ||
+mar 01 abr 2025 03:01:57 || images_containers || Disposotivo minipc ||
+mar 01 abr 2025 03:01:59 || images_containers || Creado stack homeassistant_nodered ||
+mar 01 abr 2025 03:03:10 || SSH_containers || Node-Red hecho ||
+mar 01 abr 2025 03:03:14 || SSH_containers || Homeassistant hecho ||
+mié 02 abr 2025 22:30:14 || images_containers || Actualizando containers ||
+mié 02 abr 2025 22:31:23 || images_containers || Imagenes descargadas ||
+mié 02 abr 2025 22:31:49 || images_containers || Disposotivo minipc ||
+mié 02 abr 2025 22:31:51 || images_containers || Creado stack homeassistant_nodered ||
+mié 02 abr 2025 22:32:56 || SSH_containers || Node-Red hecho ||
+mié 02 abr 2025 22:32:59 || SSH_containers || Homeassistant hecho ||
+jue 01 may 2025 03:00:02 || images_containers || Actualizando containers ||
+jue 01 may 2025 03:01:15 || images_containers || Imagenes descargadas ||
+jue 01 may 2025 03:01:43 || images_containers || Disposotivo minipc ||
+jue 01 may 2025 03:01:45 || images_containers || Creado stack homeassistant_nodered ||
+jue 01 may 2025 03:02:51 || SSH_containers || Node-Red hecho ||
+jue 01 may 2025 03:02:52 || SSH_containers || Homeassistant hecho ||

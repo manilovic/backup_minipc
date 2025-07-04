@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+
+import subprocess
+import json
+import argparse
+import sys
+
+
+# Configuración de argparse
+parser = argparse.ArgumentParser(description="Script para buscar en índices de ElasticSearch.")
+parser.add_argument("nombre_indice", type=str, nargs="?", help="Nombre del índice en ElasticSearch.")
+parser.add_argument("nombre_campo", type=str, nargs="?", help="Nombre del campo en ElasticSearch.")
+parser.add_argument("valor_patron", type=str, nargs="?", help="Patrón de búsqueda para el campo.")
+
+parser.add_argument('-l', '--listar-indices', action='store_true', help='Listar todos los índices disponibles')
+parser.add_argument('-f', '--listar-campos', help='Lista de campos de un índice específico')
+
+
+# Parseo de argumentos
+args = parser.parse_args()
+
+
+if args.listar_indices:
+    print("Se ha solicitado la lista de índices:")
+    curl = """curl -X GET "http://192.168.1.46:9200/_cat/indices?v" | grep -v inte | awk -F" " '{print $3}'"""
+    result = subprocess.run(curl, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    print(result.stdout)
+    sys.exit()
+
+elif args.listar_campos:
+    indice = args.listar_campos
+    print(f'Se ha solicitado la lista de campos del índice "{indice}":')
+    curl = f"""curl -X GET "http://192.168.1.46:9200/{indice}/_mapping" | jq '.[].mappings.properties | keys'"""
+    result = subprocess.run(curl, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    print(result.stdout)
+    sys.exit()
+
+elif args.nombre_indice and args.nombre_campo and args.valor_patron:
+    print(f"Búsqueda en el índice: {args.nombre_indice}, campo: {args.nombre_campo}, patrón: {args.valor_patron}")
+
+else:
+    parser.print_help()  # Muestra ayuda si no se cumplen las condiciones
+    sys.exit()
+
+
+
+
+print(f"Indice: {args.nombre_indice}")
+print(f"Campo: {args.nombre_campo}")
+print(f"Patrón: {args.valor_patron}")
+print()
+
+indice = args.nombre_indice
+campo = args.nombre_campo
+patron = args.valor_patron
+
+
+
+
+
+
+
+
+
+def busqueda(indice,campo,clave):
+
+    curl = f"""curl -X GET "http://192.168.1.46:9200/{indice}/_search?pretty" -H 'Content-Type: application/json' -d'
+{{
+  "size": 100,
+  "query": {{
+    "match": {{
+      "{campo}": "{clave}"
+    }}
+  }}
+}}'"""
+    print(curl)
+
+
+    result = subprocess.run(curl, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    print(result.stdout)
+    result_json = json.loads(result.stdout)
+    #id = result_json['hits']['hits'][0]['_id'] if result_json['hits']['hits'] else 'N/A' 
+    value = result_json['hits']['total']['value']
+    print(f"Resultados: {value} (Max100)")
+    print()
+
+    ids = [hit["_id"] for hit in result_json['hits']['hits']]  ## lo mismo:
+    #ids=[]
+    #for hit in result_json['hits']['hits']:
+    #    id = hit["_id"]
+    #    ids.append(id)
+
+    titulo = [hit["_source"]["Título"] for hit in result_json['hits']['hits']]
+    estreno = [hit["_source"]["Estreno"] for hit in result_json['hits']['hits']]
+    sinopsis = [hit["_source"]["Sinopsis"] for hit in result_json['hits']['hits']]
+    ubicacion = [hit["_source"]["Ubicación"] for hit in result_json['hits']['hits']]
+    resolucion = [hit["_source"]["Resolución"] for hit in result_json['hits']['hits']]
+
+
+    combinada = list(zip(ids,titulo,estreno,sinopsis,ubicacion,resolucion))
+    #print(combinada)
+
+    for id, titulo, estreno, sinopsis, ubicacion, resolucion in combinada:
+        print(f"ID: {id}")
+        print(f"Título: {titulo}")
+        print(f"Año: {estreno}")
+        print(f"Resolución: {resolucion}")
+        print(f"Sinopsis: {sinopsis}")
+        print(f"Ubicación: {ubicacion}\n")
+
+    print(f"Resultados: {value} (Max100)")
+    
+
+        
+    return (ids)
+
+
+
+ids = busqueda(indice, campo, patron)
+print(ids)

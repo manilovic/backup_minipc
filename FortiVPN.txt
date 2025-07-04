@@ -1,0 +1,257 @@
+juanmanuel.gonzalez@mufasavm13's password: 
+Servisores mufasa:
+PuJ6cv178Z5b
+
+-------------
+
+Hindi<INFIX>Z4hra.
+
+HindiREDZ4hra.
+HindiSNTZ4hra.
+
+-------------
+Plex@plex10
+
+ssh -X minipc@extip  -p 5001
+ssh -X pi3@extip -p 5002
+
+------------
+Santander outils:
+https://passwordreset.microsoftonline.com/
+n932075@lynxfctech.com
+Olaffur@005
+juanmanuel.gonzalez@lynxfctech.com
+PIN workday:
+2509
+
+-----------
+REDSYS
+X5716JG
+55958184
+2024+Rfc20T*
+--------------------
+
+REmoto brasil
+CLOUDx235211@prservicos.com.br
+
+https://client.wvd.microsoft.com
+Suscribir:x235211@prservicos.com.br
+Sant@052025
+---------------
+
+CECA
+(secundaira n932075@lynxfctech.com)
+
+
+id2846
+JM09+RSA
+Olaffur@03@Olaffur
+
+Kyndryl.1234567
+
+desarrollo OFF
+Caba110.de.tr0ya
+
+OFFLINE
+Caba110.de.tr0ya
+tr0ya.de.Caba110
+
+sudo su - lynx
+
+to online >> ssh lynxonyec
+
+
+
+----------
+PRISMA (Maq Virtual)
+jgonzalez@serv.externos.prismamp.com
+Olaffur@12
+NET01\jgonzalez
+
+
+-----------------
+
+Support Instancias LYNX
+
+n932075Lynxfctech
+Password1234
+
+elastic
+XsDIvakXLMTPiwjVpurQw0LdvePk9y
+----------------
+SNT_UK 
+
+pin nuevo 2025
+grid pattern
+12345
+6
+
+juanmanuel.gonzalez@santander.co.uk
+
+Olaffur10000000
+
+User ID: C0306495
+
+------------------------------
+
+
+Nuevo Confluence:
+email: juanmanuel.gonzalez@lynxfctech.com
+Olaffur@01
+
+FORTI:
+Home@home100
+DNS:192.168.1.33, 80.58.61.250, 80.58.61.254
+cinectado:192.168.72.9, 192.168.34.18
+
+
+
+
+--------------------------
+XPI
+juan.vega.t6612@xpi.com.br
+Olaffur@04
+
+-------------------
+Juanma XPI
+bdrhsdskcpwcrsnx
+
+
+-------------------
+AWS:
+juanmanuel.gonzalez
+Olaffur@aws
+
+
+--------------------
+03052020
+firma:55958184
+
+-------------------------------------
+
+--------------------------------------
+
+
+
+
+BBVA:
+XE89163
+1234@Ene
+1234@Feb
+c4b3z4z0
+
+
+Angulo
+xmz8593
+j4j4j4j4
+
+Isra: 
+xe89063
+[13:47] Alonso Ramos Israel
+c4r4m3l0
+
+
+Felix:
+XEA1379
+EmilA239
+
+
+Sandy:
+XEA1380
+j9j9j9j9
+
+elastic
+2T7F5toG
+
+49iP8wXF
+lplyx017.igrupobbva
+xplynx02@lplyx016.igrupobbva
+
+des:qazwsx12    87RwHBcy
+xplynx02@ldlyx110.igrupobbva
+
+xplynx01@ldlyx109.igrupobbva
+8e6Lvz5s
+
+qazwsx12
+
+Ramiro:
+XE37719
+52gdtagq
+
+
+https://bbvacert.igrupobbva/lynx
+https://de-bbvacert.igrupobbva/lynx
+----------------------
+
+
+instancias:
+
+Yasm.ne<INFIX>H4mdan
+
+Yasm.neREDH4mdan
+----------------------
+
+SNT_MX:
+ssh -L10081:lynxweb.mx.corp:10081 -J juanmanuel.gonzalez@scarvm71.lynxfctech.com prhtlynx@180.195.40.21
+Agosto@Agosto01
+R1c412%setg12
+--------------------------
+
+
+
+5227 1903 3741 8979
+ 12/25 666
+
+4043860064886268 trj comun
+4766635245250005 
+
+https://bbvacert.igrupobbva/lynx
+
+xplynx02
+87RwHBcy
+-------------------
+Lego@land100
+
+
+
+
+ingles:
+Alba@ingles10
+
+
+
+adic6666
+bbva2022
+
+
+ldap:
+B3b3@hija
+
+BBVA_ES WEB
+isra >> 4d1cbbv4
+ANtonio >> bBvA2022
+
+santander_mx:
+  S16santander•••••••••
+
+--------
+
+sql -q "select count(*) from tmos_fraude_detectado_regla tfdr, tepu_regla tr where tfdr.regla_id = tr.id and tr.trgal_tipo_id = 'PRE'"
+sql -q "select regla_id ...."
+
+sql -q "select orden, regla_id from tmos_fraude_detectado_regla where regla_id='33265'"
+Elastic Get /transacctions-20210902/_doc/202109020017237873 | grep REGLA
+
+script/emitoFD.awk
+job5E
+source Etc/elastic_util_sh
+
+
+
+----------------
+
+650 13 16 49 
+patri
+
+Santander@082023

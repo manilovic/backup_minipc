@@ -1,0 +1,441 @@
+Conexion OFFLINE (BBVA_ES_DE)
+scarvm85 (lynxOnLine) ~/lynxOnLine %: seeproca.sh | grep " T "
+0 T lxbbvade 1867341       1  0  80   0 -  2621 -      Feb15 ?        00:00:01 /bin/bash ../lynxOnLine/script/update.sh -scp -mmdb -tablas -modelos ../lynxOnLine/jobs/job.online
+1 T lxbbvade 1867343 1867294  0  80   0 - 11671 -      Feb15 ?        00:00:00 ../lynxOnLine/bin/sb.lx localhost 5181 -B
+
+GetTables (BBVA_ES_DE)
+../lynx/script/lnxGetTables.sh -I ES -t TECS_VARIABLE_TIPO_VARMEN (variable tipo recargado con cambio de dia de forma normal)(requiere reinicio calificadores)
+../lynx/script/lnxGetTables.sh -I ES -t TMCU_BIN_RANGO_ENTIDAD
+gvim Etc/lnxGetTables.xml 
+
+GetTables (snt_mx_DE)
+lnxGetTables.sh -t TECS_VARIABLE_TIPO_VARMEN
+
+califReset, mejor que xmete.sh CX:
+el califReset te mata todos los calificadores hijos, para cosas que sean de recargas que no sean reglas
+
+gototest para buscar tx
+
+convertirVarMes:(REDSYS)
+convertirVarMes -file Tablas/varAccFin_2.acc -lenVar $((19+1)) #20 pq hay que pasarle la longitud del campo (19) + 1 = 20
+5415418119222604
+convertirVarMes -file Tablas/varAccFin_2.acc -lenVar 20 | grep 5415418119222604 > /home/lynx/IIC/varmensualJM.txt &
+
+metodo rapido 
+~/IIC/queryVarMes -campobase 2
+le pasas la tarjeta (con los 3 espacios por detras) y te devuelve los valores instantaneamente
+
+
+
+
+cd; source felixutilsportable.sh 
+dameTx PB 1 
+
+----------------------------
+
+
+Tablas reglas version:
+
+tmos_fraude_detectado_regla where objeto_id=trj
+
+.............................
+Elastic
+
+lxdc intenta insertar. Si falla se logea en Log/datacluster.active y se crean ficheros en Log/LXDCBackLog/
+
+Tras unos minutos el script/fileserver.backlog.lxdc.sh reintenta (hasta 3 veces, pero seguidas, creo que las separa 30 segundos) usando los ficheros de Log/LXDCBackLog/, el resultado de ese reintento se guarda en Log/LXDCErrors/backlog*
+
+
+Para ver si Elastic encola es fácil. Solo hay que ver si se estan generando ficheros en Log/LXDCLongBuf, que es donde los fileserver-switch-longbuf-klogger de elastic dejan sus caquitas (editado) 
+
+-------------------------
+
+------ORACLE
+
+sql -q "describe tmos_fraude_detectado_aa"
+
+
+.
+--------db2
+
+sql -q "describe table tmos_fraude_detectado_aa"
+
+
+
+lista\ de\ tablas\ instancia.txt 
+
+
+sql -q "list tables for schema lynxschm"
+
+
+-----------------------
+Varios Instancias desarrollo:
+
+Recarga reglas:
+source /opt/IIC/lynxQA/profile_test
+offline
+lnxMulti.sh
+online
+califReset
+
+Reparar lxdb:
+Paramos lxdb, online y off
+rm -rf /dev/shm/*; echo s | freeusermem.sh; (reiniciar lynx y Borrar toda la memoria de lxdb y compartida)
+
+
+------------------------------
+
+############BHV online/Modelos/
+
+
+
+el 22 es la regla 2+4+16, es decir:
+
+1º regla => 1
+
+2º regla => 2
+
+3º regla => 4
+
+4º regla => 8
+
+5º regla => 16
+
+6º regla => 32
+
+7º regla => 64      1 0 0 0 0 0 0
+
+8º regla => 128   1 0 0 0 0 0 0 0
+
+      Posición: 8 7 6 5 4 3 2 1 0  
+      Valor:    1 0 0 1 0 0 0 0 0
+                1 1 0 1 1 1 0 0 0
+            
+
+                      filtrar por bit en kibana bit 9           
+{
+  "script": {
+    "script": {
+      "source": "(doc['lynxBehaviour'].value & (1 << 9)) != 0",
+      "lang": "painless"
+    }
+  }
+}
+
+
+                      filtrar por bit 9 y bit 6            
+{
+  "script": {
+    "script": {
+      "source": "(doc['lynxBehaviour'].value & (1 << 9)) != 0 && (doc['lynxBehaviour'].value & (1 << 6)) == 0",
+      "lang": "painless"
+    }
+  }
+}
+
+
+
+------------------------------
+
+
+lxdc intenta insertar. Si falla se logea en Log/datacluster.active y se crean ficheros en Log/LXDCBackLog/
+
+Tras unos minutos el script/fileserver.backlog.lxdc.sh reintenta (hasta 3 veces, pero seguidas, creo que las separa 30 segundos) usando los ficheros de Log/LXDCBackLog/, el resultado de ese reintento se guarda en Log/LXDCErrors/backlog*
+
+
+Para ver si Elastic encola es fácil. Solo hay que ver si se estan generando ficheros en Log/LXDCLongBuf, que es donde los fileserver-switch-longbuf-klogger de elastic dejan sus caquitas (editado) 
+
+
+---------------------------------------
+
+
+FLAGS
+por saber si hau algun sitio donde se vea cuando se activo y se desactivo
+creo que en esta tabla la fecha_inicio TMOS_IDENTIFICADOR_FLAGS_FCH_H
+
+[6/5 11:24] Garcia Pastrana Pablo
+Le puedes pasar un pp entonces al que tienes
+[6/5 11:25] Garcia Pastrana Pablo
+El opf debe de ser algo del rollo tbd_flag_cliente.opf
+[6/5 11:25] Garcia Pastrana Pablo
+O algo de Etc/*flag*cliente*opf
+[6/5 11:25] Garcia Pastrana Pablo
+El dump con el grep que has hecho, le pones | ppv4.sh -l Etc/(el .opf) -c up,ul
+
+| ppv4.sh -l Etc/(el .opf) -c up,ul
+| ppv4.sh -l Etc/(el .opf) -c up,u
+---------------------------
+
+
+
+
+TE22984 - Santander022020 (sin @)
+
+TE60609 - Santander@022020
+
+
+Perfil QA >> source /opt/IIC/lynxQA/profile_test
+Buscar OPs de QA >> less /opt/IIC/Test/TestEspecificaciones/Automaticos/SNT_C_ES/Test_003032b_Trafico_PB/Datos/trafico_PB.dat 
+
+(reverse-i-search)`pp': head -1 ~/IIC/Test/TestAuto/Automaticos/SNT_DE/Test_003032_Trafico/Datos/trafico_OP.dat | ppv3.sh -l Etc/OP.opf -c op,ol #| rt_cat -o mem .pgsho2rconl .xpgsho2rconl .xrconl
+
+
+--------------------------------
+
+ for i in {01..30}; do ./user_response.sh 201911${i}; done
+
+
+---------------------------------------
+# find . -name "*[log,txt]" -mtime +30 -exec gzip -9f {} \; -ls
+
+--------------------------------------------
+Lista tablas de instancia:
+sqlite3 AdqData/diario-20191104.db ".s" (redsys)
+
+
+
+sqlite3 AdqData/diario-20191104.db ".schema ops_ad"
+
+
+
+
+sqlite3 AdqData/diario-20191104.db "select cliente_id, count(*) from ops_ad group by cliente_id"
+
+
+
+------ORACLE
+
+sql -q "describe tmos_fraude_detectado_aa"
+
+
+.
+--------db2
+
+sql -q "describe table tmos_fraude_detectado_aa"
+
+
+---------------------------------------------
+
+SNT_ES
+
+
+scp logoffline20191126130049.tar.xz lxscesde@pumbavm12:/lynx/SNT_C_ES/lynx.info/{ENTORNO}/history/2019
+
+scp                               lxsntde@pumbavm12:/lynx/SNT_DE/lynx.info/PRO/history/2019
+
+
+----------------------------------
+
+Redsys analiticos normales:
+
+../lynx/script/generarTxt_diarios.sh -o -s -S -u ftpetlp -h datastagelvp.redsys.es -l . -n 1 -a 1 -t 1 -T 16 -m 2 -z -A
+
+--------------------
+
+Redsys Reglas
+
+ID ONLINE en 0 no se responden y las reglas de autorixazcion no se hacen tampoco
+
+-------------------------------------
+Resdys:
+
+recarga reglas en online
+
+echo "CR|0" | rt_cat -o mem .pdmcl2ctcal .xpdmcl2ctcal .xctcal &
+
+echo "CX|*|CR|0" | rt_cat -o mem .pset2dmct .xpset2dmct .xdmct
+echo "CX|*|CR|0" > pipe de demux
+
+
+recarga de reglas en offline:
+
+../lynx/script/lnxGetTables.sh -A -G -B -M -c reglas -l .pdownload 
+
+
+*-----------------------------
+
+SNT BR: transacciones antiguas que no se ven en Log/LogTxn o LogMT:
+
+home/lynx/IIC/ARCHIVOS_MODELO/processed/bkOps*log.gz
+
+
+Las reglas de autorización de clientes aplican a IBs, CCs y ATs
+
+Las reglas de autorización de tarjetas aplican a OPs, OFs y 3DSs
+
+PF
+No se procesan, fuera de cualquier evaluacion, en la historia sí que se considera:
+ATLG
+AUTE
+
+PJ
+ATLG
+AUTE
+LGIN
+MBLG
+
+Se tienen en cuenta para la evaluación de otras transacciones,pero ellas mismas no se evalúan
+
+----------------------------------------------
+
+Geany:
+
+Ver >>> reemplazar
+
+Buscar : nombre proceso
+reemplazar: \n-
+check "usar secuencias de escape"
+
+----------------------------------------
+tar -Oxf archivo.tar | grep "palabra_buscada" (letra O mayuscula)
+
+
+----------------------------------
+
+
+cat OPjm.txt | rt_cat -o mem .pset2dmct .xpset2dmct .xdmct
+
+echo "CX|*|CR|0" | rt_cat -o mem .pset2dmct .xpset2dmct .xdmct
+
+echo "CX|TRJ|CR|0" | rt_cat -o mem .pset2dmct .xpset2dmct .xdmct
+
+
+939  [ 2019-03-25 11:35:21 ] info_channels -dump mem .pdmonl2cwriter.0        .xpdmonl2cwriter.0          .xcwriter.0
+ 940  [ 2019-03-25 11:35:55 ] #rt_cat -q mem .pdmonl2cwriter.0    1    .xpdmonl2cwriter.0          .xcwriter.0
+ 941  [ 2019-03-25 11:35:56 ] info_channels -dump mem .pdmonl2cwriter.0        .xpdmonl2cwriter.0          .xcwriter.0
+ 942  [ 2019-03-25 11:36:04 ] muestraPipas.sh .p*
+ 943  [ 2019-03-25 11:36:15 ] rt_cat -q mem .pdmonl2cwriter.0    1    .xpdmonl2cwriter.0          .xcwriter.0
+ 944  [ 2019-03-25 11:36:19 ] info_channels -dump mem .pdmonl2cwriter.0        .xpdmonl2cwriter.0          .xcwriter.0
+ 945  [ 2019-03-25 11:36:22 ] lynx.chckchan 2> /dev/null
+ 946  [ 2019-03-25 11:36:29 ] info_channels -dump mem .pdmonl2cwriter.0        .xpdmonl2cwriter.0          .xcwriter.0
+ 947  [ 2019-03-25 11:36:38 ] seeproca.sh | grep sblx
+ 948  [ 2019-03-25 11:36:41 ] seeproca.sh | grep sb.lx
+ 949  [ 2019-03-25 11:38:02 ] kill -stop 22836
+ 950  [ 2019-03-25 11:38:07 ] kill -cont 29022
+ 951  [ 2019-03-25 11:38:11 ] muestraPipas.sh .p*
+ 952  [ 2019-03-25 11:38:19 ] cat .pdm2sblx
+
+-------------------------------------------------
+
+ 1028  [ 2019-06-06 11:26:06 ] find . -maxdepth 1 -type f -exec grep OP {} +     dentro de los archivossssssssssss
+ 1029  [ 2019-06-06 11:26:40 ] find . -maxdepth 1 -type f -exec grep "^OP" {} +
+ 1030  [ 2019-06-06 11:27:42 ] time find . -maxdepth 1 -type f -exec grep "^OP" {} +
+ 1031  [ 2019-06-06 11:28:18 ] time find . -maxdepth 1 -type f -exec grep "^OP" {} \;
+ 1032  [ 2019-06-06 11:29:25 ] time find . -maxdepth 1 -type f -print0 | xargs -0 grep "^OP"
+ 1033  [ 2019-06-06 11:29:46 ] time find . -maxdepth 1 -type f -print0 | xargs -0 -p grep "^OP"
+ 1034  [ 2019-06-06 11:33:50 ] time find . -maxdepth 1 -type f -exec OP| {} +
+ 1035  [ 2019-06-06 11:33:57 ] time find . -maxdepth 1 -type f -exec "OP|" {} +
+ 1036  [ 2019-06-06 11:34:06 ] time find . -maxdepth 1 -type f -exec grep "OP|" {} +
+ 1037  [ 2019-06-06 11:34:17 ] time find . -maxdepth 1 -type f -exec grep "OP" {} +
+ 1038  [ 2019-06-06 11:34:30 ] time find . -maxdepth 1 -type f -exec grep "OP_" {} +
+ 1039  [ 2019-06-06 11:35:22 ] time find . -type f -maxdepth 1 -exec grep "OP_" {} +
+ 1040  [ 2019-06-06 11:35:36 ] time find . -type f -exec grep "OP_" {} +
+
+
+id=202006020352020044738044; zgrep $id Opfiles/done/processed/bkOps.done.*20200602*  | grep $id --color
+
+
+find . -maxdepth 1 -type f -name juan         >>>>>>> nombre de archivos 
+
+
+find . -type f -name "*.tbd" -exec grep juanma {} +
+
+find . -maxdepth 1 -type f -name 'err*log' ! -newermt 20190301 #-delete #-exec gzip {} \;
+
+Podéis ejecutar la siguiente instrucción para comprimir los logs viejos:
+
+find /home/lynxhttp/httpd/logs/ -type f -name '*_log.??????????' ! -newermt '2019-05-31 23:59:59' -exec gzip -9 {} +
+
+
+
+find . -type f -name "*.tbd" -exec grep juanma {} +
+
+ -exec ls -ltr {} +;
+
+# find . -maxdepth 1 -name "*[log,txt]" -mtime +30 -exec gzip -9f {} \; -ls
+
+
+find Opfiles/done/ -maxdepth 1 -name 'bkRR*' -newermt "20241114" ! -newermt "20241115" -exec ls -ltr {} +; ### entre 
+
+find -maxdepth 1 -name err.done* -newermt "20190101" ! -newermt "20200101" -exec ls -ltr {} +
+
+No tira >>>> find Opfiles/done/ -maxdepth 1 -name bkRR* -newermt "20191014" -exec ls -ltr {} +; ### todos despues del 20191410
+
+---------------------------
+
+rep 'ES0182044809044C' bkRPs.done.6948.1561431052.{244..273}.log | ~/lynx/pp.sh -l ~/lynx/Etc/RP.opf -c pp,pl
+
+
+lxdb_shell dump -g /dev/shm/xplynx01_TRANSACCIONES_ES__local0/
+
+
+lxdb_shell get -i 3 '0019-039948623S                         ' /dev/shm/xplynx01_TRANSACCIONES_ES__local0/
+
+
+
+lxdb_shell dump /dev/shm/lxsnbrpr_OPERACIONES_lxdb | pp.sh -l Etc/calificador.tarjetas.opf | grep TARJE
+
+
+-----------------------------------
+
+REDYS, ejemplo de lxdb:
+
+ lxdb_shell dump -r /dev/shm/lynx_TRANSACCIONES | grep ^PI | grep "37593427L" | ppv3.sh -l Etc/PI.opf -c pp,pl
+
+-----------------------------------
+
+ue me quede claro
+14:36
+paginas azules tira de tmos
+14:36
+y paginas verdes de sqlite
+
+
+Fede (javier.sanchez)
+:reloj2:  14:36
+si
+14:36
+y disparos de reglas es tmos tambien
+tmos_regla o algo asi
+
+
+------------------------------------------
+
+AWK:
+ cat 20sept.txt  | awk -F"|" '{if($1=="OP"||$1=="A3"){ print $1 "|" $7"|" $8 "|" $6 "|" $458 "|"$457 "|" $113"|"}}'
+ cat Opfiles/done/processed/bkOp*20210920* | awk -F"|" '{if($458!=""){ print "|" $458"|"}}'
+
+-----
+
+OP >> segunda columna op ol
+ 
+HASH >>> pp pl >>> los decimales, son consultas del hash y del lxdb
+
+wf alertas >>> checkeamos fo
+
+OP por barras >>  orden del fichero >>>idx
+
+---------------------------
+hc comprativa con web >>> campo 8 variable_tipo
+
+consultar haskes bhv >>> buscar onlineBHV.opf
+
+---------------------------------------------
+Etc/AdqSql_conf.xml
+ver formato por barras en diarios
+<Entorno id="0"> etc
+
+
+NO:?
+Offline > Etc/AdqSql_conf.xml
+Buscar equivalencia >> Entorno 0, 1, 2 con ops_aa, ops_ab...
+
+
+--------------------------------------------
+errores de bases de datos:
+
+log/emisor
+
+---------------------------------------------
+
+SQL> SELECT id, descripcion FROM TEPU_REGLA WHERE REGLA_ESTADO_ID = 0 AND id in (select distinct(regla_id) from tepu_regla_condicion where expresion_condicion like '%FILE_%');

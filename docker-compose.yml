@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:latest"
+    volumes:
+      - /home/minipc/docker/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro  
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    devices:
+      - /dev/hci0:/dev/hci0
+  
+  node-red:
+    image: nodered/node-red:latest
+    container_name: node-red
+    environment:
+      - TZ=Europe/Madrid
+    ports:
+      - "1880:1880"
+    volumes:
+      - /home/minipc/docker/nodered/data:/data
+    restart: unless-stopped
+    networks:
+      containers:
+        ipv4_address: 172.20.0.5
+        
+networks:
+  containers:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+
+

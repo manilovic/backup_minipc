@@ -1,0 +1,32 @@
+[Unit]
+Description=AceStream Web Server
+After=network.target
+
+[Service]
+# Tipo de servicio simple (proceso único)
+Type=simple
+
+# Usuario que ejecuta el servicio
+User=minipc
+
+# Directorio de trabajo donde está el script
+WorkingDirectory=/home/minipc/acestream-server
+
+# Comando para iniciar el servicio usando Python del entorno virtual
+ExecStart=/home/minipc/acestreamserver-env/bin/python3 /home/minipc/acestream-server/server.py
+StandardOutput=append:/home/minipc/LogsJM/acestream_server.log
+StandardError=append:/home/minipc/LogsJM/acestream_server.log
+
+# Reiniciar el servicio si se detiene por error
+Restart=always
+
+# Variables de entorno
+# Prioriza binarios del entorno virtual (como Python y chromedriver)
+Environment="PATH=/home/minipc/acestreamserver-env/bin:/usr/bin:/bin"
+
+# Muestra logs de Python sin retardos (útil para debugging en logs de journalctl)
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+# Se inicia automáticamente en el arranque del sistema
+WantedBy=multi-user.target

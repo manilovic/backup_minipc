@@ -1,0 +1,292 @@
+## DAM envios:
+
+bkOps.done.106802.20220525??????.36821.crypt.log.gz|
+bkOps.done.106802.20220525??????.36651.crypt.log.gz
+
+1- Movemos los archivos faltantes, importante que nos indiquen los ficheros exactos:
+
+  mv Opfiles/done/processed/bkOps.done.106802.*.{13312..13414}.log.gz Opfiles/done/processed/reprocess/
+
+2- Lanzamos el primer comando del DAM: (este devuelve los bks al Opfiles/done/processed)
+
+ ./script/lxBk2SHA.sh -c Etc/cript.d/lxBk2SHA_MANUAL.conf &> .pxfer2log &
+
+3. Entramos en la carpeta recrypt y lanzamos un tar:
+
+  cd Opfiles/done/processed/recrypt/
+tar -cf LYNX.bkOpsAll.20250327.tar * --remove-files
+tar -cf LYNX.bkOpsAll.20250323.3.tar bkOps.done.*.202503*.{154901..155178}.* --remove-files
+  
+md5sum  LYNX.bkOpsAll.fechahora.md5.tar
+
+4. Lanzamos segundo comando del DAM desde eldirectorio raiz:
+
+  ./script/lxSend2DataModel.sh -f -c Etc/send.d/send2DAM_manual.conf &> .pxfer2log &
+
+
+Los mensajes de error se pueden chequear en el Log/xfer
+
+
+------------------------------------------
+
+## Limite tx lxdb:
+lxdb_shell dump -a -o TRANSACCIONES | head -1
+  
+----------------------------------------------
+
+: find Opfiles/done/ -maxdepth 1 -name 'bkRRs.done*' -newermt '2025-02-07 05:00:00' ! -newermt  '2025-02-07 11:00:00' -exec grep 4921199568319204 {} \; > RRs_CASO_20250213 &
+
+----------------------------------------------
+GAT:
+
+sql -q "select fraude_tipo_id from tmos_fraude_Detectado_aa where orden='202304100000003099'"
+
+orden = fecha_orden + el contador_orden  ($123 y $124 tx por barras)
+
+fraude_tipo_id:
+-Cuando se envia a GAT; debería ponerse -16, -17 o -18
+-16 pendiente de enviar, -17 enviado OK, -18 enviado KO
+
+
+----------------------------------------------
+
+
+convertirVarMes:(REDSYS)
+convertirVarMes -file Tablas/varAccFin_2.acc -lenVar $((19+1)) #20 pq hay que pasarle la longitud del campo (19) + 1 = 20
+5415418119222604
+convertirVarMes -file Tablas/varAccFin_2.acc -lenVar 20 | grep 5415418119222604 > /home/lynx/IIC/varmensualJM.txt &
+
+
+convertirVarMes -file Tablas/varAccFin_2.acc -lenVar 20 | grep 5415418119222604 > /home/lynx/IIC/varmensualJM.txt &
+
+
+
+metodo rapido:
+
+~/IIC/queryVarMes -campobase 2
+
+
+le pasas la tarjeta (con los 3 espacios por detras) y te devuelve los valores instantaneamente
+
+
+----------------------------------------------
+
+  
+lynxcoenv2) nalavm76 (lynxOnLine) ~/lynxOnLine %: lxdb_shell dump /dev/shm/lx4bespr_POS_TRJ__local0/ | ppv4.sh -l Etc/lista_pos_trj.opf  -c up,ul
+
+
+
+
+  
+## CONTEOS: 
+Elastic GET /transactions-202301*/_count '{"query":{"term": {"TIPO_MENSAJE": "A3" }}}' | jq .
+Elastic GET /transactions-202301*/_count '{"query":{"term": {"TIPO_MENSAJE": "A6" }}}' | jq .
+Elastic GET /transactions-202301*/_count '{"query":{"term": {"TIPO_MENSAJE": "PB" }}}' | jq .
+Elastic GET /transactions-202301*/_count '{"query":{"term": {"TIPO_MENSAJE": "OP" }}}' | jq .
+Elastic GET /transactions-202301*/_count '{"query":{"term": {"TIPO_MENSAJE": "PI" }}}' | jq .
+
+------------------------------------------
+
+## Catastro
+
+ubicados en offline: Files/
+los completados en Files/Done/
+Logs >> Log/files.done.*:
+    Dentro del fichero se puede buscar: "Inicializando carga de fichero CTxxx"
+                                        "Finalizando carga de fichero CTxxx"                              
+-------------------------------------------
+
+Usuarios y acciones:
+sql -q "select * from teos_usuario where USUARIO='A4000365'"
+
+el ID corresponde con el ID_USUARIO:
+sql -q "select * from tmos_accion_usuario where USUARIO_ID='4379'" 
+
+
+ las acciones de web se envian a todos los host y ya esta
+tmos_accion_usuario_hist
+
+
+tmos_accion_usuario --->  ???  ----> BT ---> tmos_accion_host 
+
+BTs en bkOps
+RRWW en bkRRs
+-------------------------------------------
+
+Ficheros DT en backlog rest
+
+
+---------------------------------------
+
+## Envio ftp:
+
+chmod 664 $SQLITE_FILE$dia.txt
+sftp $FTP_USER@$FTP_HOST > log_sftp_$dia.log 2>&1 << EOF
+cd $FTP_PATH
+put $SQLITE_FILE$dia.txt
+exit
+
+
+Usuario: ftpetlp
+Servidor: datastagelvp1b 
+Ruta: /projects/DataStage/InputData/ftpetl/
+
+sftp ftpetlp@datastagelvp1b
+cd /projects/DataStage/InputData/ftpetl/
+
+## analiticos (dia anterior)
+
+../lynx/script/generarTxt_diarios.sh -o -t 1 -T 16 -d 20230124 &
+../lynx/script/generarTxt_diarios.sh -o -t 1 -d 20250421 -w /data/lynx_AdqData_local/ &
+
+../lynx/script/generarTxt_diarios.sh -o -t 1 -d 20250302 -w /data/lynx_AdqData_local/ &
+
+# user_response: -f (mismo dia)
+
+
+../lynx/script/generarTxt_diarios.sh -o -f -d 20250209 -w /data/lynx_AdqData_local/ &
+
+(../lynx/script/generarTxt_diarios.sh -o -f -d 20250417 -w /data/lynx_AdqData_local/ ; ../lynx/script/generarTxt_diarios.sh -o -f -d 20250418 -w /data/lynx_AdqData_local/) &
+
+ 
+# FILE_POSITIVE_LIST: -b
+
+FILE_POSITIVE_LIST_20230109.txt 
+ 
+ ../lynx/script/generarTxt_diarios.sh -o -b -d 20230109 -w /data/lynx_AdqData_local/ &   se crea el 20230108 (un dia antes)
+
+ ../lynx/script/generarTxt_diarios.sh -o -b -d 20250421 -w /data/lynx_AdqData_local/ &
+
+### acciones
+../lynx/script/generarTxt_diarios.sh -o -f -k -d 20230123 &
+
+
+-------------------------------------------------------------
+
+Contadores antiguos C1, C29 (dias) --- previos NRT:
+
+DUMP:
+lxdb_shell dump -r0 C1 | struct_parser.py -c Etc/counters_C1_struct_parser.yml | awk -f tools/indice_regla.C1.awk
+
+
+Chequeo comercio con Localizacion_entidad_id (2095): 
+
+lxdb_shell get -r0 -i 0 '0058937848     2095' C1 | struct_parser.py -c Etc/counters_C1_struct_parser.yml | awk -f tools/indice_regla.C1.awk | grep IMP_ACUM_DEG                          
+
+sacamos importes del dia
+lxdb_shell get -i 1 '0058937848     ' TRANSACCIONES  | grep 20250610 | grep 2095 |  ppv4.sh -l Etc/OP.opf -c pp,pl | grep -e ACE -e "FECHA_HORA " -e LOCALIZACION_ENTIDAD_ID -e CODIGO_COME -e "IMPORTE " | grep -B 5  "129 : 0"
+
+
+
+-------------------------------------------------------------
+
+### NRT Transmemory CONTADORES
+
+ONLINE:
+consulta_TRM.sh -c 10 -d 14  -f "Tablas/reglaTRM_TRJ.tbd" -b TRANSMEMORY_TRJ -k "4722940030320008   " -r Etc/trm_registers_struct_parser.yml -e Etc/trm_extra_struct_parser.yml -v Var/transmemory_extra_
+
+
+Simplementa cambiar lo que viene después del -k para tarjetas
+Transmemory tiene 4 tipos, para consultar la query de cada uno hacer : consulta_TRM.sh -h
+Importante recordar los "" entre la clave que es lo que va después del -k
+
+
+OFFLINE LOGs:
+xzcat AdqData/Transmemory/lxdb.TRJ.*20231203* | grep 5489133081462101
+
+Sumar 6 del conteo online:
+
+
+####################    NUEVA VERSION TRM 3
+
+consulta_trm3.sh TRANSMEMORY_COUNTERS TRANSMEMORY_RULES "TRJ~4864xxxxxxxxxx012   "
+
+TRJ|121|COUNT@*|1|0
+TRJ|122|SUM@#5|52.09|0
+TRJ|128|COUNT@*|1|0
+TRJ|129|SUM@#5|52.09|0
+TRJ|148|COUNT@*|1|0
+TRJ|225|COUNT@*|1|0
+
+TRJ = tarjetas
+CMR= comercios
+CVM = comercio_vm
+NIF = dnis
+
+Tablas regla:                                                                       ---------    
+42466~0~4~0~1~3~1~NULL~TRM~COUNT@*|SUM@#5~Pago_dolar_2d_AA~#3        ~172800~-1~0~0~128|1|129|1~~-1~-1~0~-1~-1
+
+
+
+#########
+
+
+XC enrolment, clave cruza token id >> XPAY 
+
+vale si, en el opf de los enrolment, si miras la columna hk, esa es la clave que se usa para cruzar
+
+XC dump -k tb vale
+----------------------------------------------
+
+A3 A6 se actualian con RTA3 y RTA6 como si fueran RO
+AUTENTICACIONES
+
+lxrst_SISSAS_to_lynx
+
+-------------------------------------
+
+BT peticiones bloqueo y listas
+bkOps.
+
+--------------------------
+
+kibana:
+
+OFF:
+Etc/lxdces_layout.cfg
+
+
+----------------------
+
+ws cajeros >>> log/servTarjetas
+
+-------
+
+orden calculo de reglas:
+
+Congig/lib_
+
+
+------------------------
+
+
+[12:56] Gonzalez Vega Juan Manuel
+como miras tu la clave de del RO en el opf?
+[12:57] Gonzalez Vega Juan Manuel
+yo suelo mirar con el -k en el lxdb y tal
+[12:58] Gonzalez Vega Juan Manuel
+es la columna hk? que id transaccion tiene un "3" pero tarjeta tb tienen un "1" 
+[12:58] Sanchez Diego Javier
+la columna hk
+[12:59] Gonzalez Vega Juan Manuel
+justo 
+[12:59] Sanchez Diego Javier
+eso es la de busqueda, y la de coincidir
+[12:59] Sanchez Diego Javier
+busca por la uno para hacer el get, pero luego de la historia busca la que coincide el 3
+
+
+
+select valor from tepu_variable_auxiliar where id='LVL_QRY_OPTIMIZATION'select comentario from tmos_objeto_comentario where objeto_id = '1111111111111111111' and objeto_tipo_id= 'TRJ' order by fecha_comentario descselect a.* from tmos_tarjeta a where a.tarjeta_id = '1111111111111111111'select a.*,b.* from tmos_th a,tmos_th_objeto b where a.id=b.th_id and b.objeto_id = '1111111111111111111' and b.objeto_tipo_id = 'TRJ'select a.objeto_id, a.poc_confirmado_id, a.fecha_modif, b.comentario, b.fecha, b.fecha_marca_poc_desde, b.fecha_marca_poc_hasta from tmos_poc_confirmado_obj a, tmos_poc_confirmado b where estado_borrado='0' and objeto_id in ('1111111111111111111') and poc_confirmado_id=b.id order by a.fecha_modif descselect a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AA a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AB a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AC a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AE a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AF a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AG a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AH a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AI a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AJ a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select a.* , b.usuario, b.nombre from TMOS_FRAUDE_DETECTADO_AK a left outer join TEOS_USUARIO b on b.id=a.usuario_id where (tarjeta_id = '1111111111111111111' ) order by orden desc select b.orden, b.fecha fecha_respuesta, c.usuario, b.fraude_tipo_id,b.saldo,c.nombre from tmos_respuesta_usuario b, teos_usuario c where b.usuario_id = c.id and orden in (202402080060000553,202402080060000551,202402080060000550,202402080060000549,202402080060000548,202402080060000547,202402080060000546) order by b.fecha desc 
+
+
+
+
+
+
+
+
+
+
+
+

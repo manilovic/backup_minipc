@@ -1,0 +1,177 @@
+PF HK offline srvlnxhalbr03
+
+      online  srvlnxhalbr15 y 16
+ 
+ 
+PJ HK offline srvegxivlbr02
+
+      online  srvegxivlbr01
+
+ 
+PF offline srvlnxprlbr08
+
+   online  srvlnxprlbr05 06
+
+ --------------------------------------------------
+
+
+
+SNT_BR
+/
+Arquitectura
+/
+Máquinas SNT_BR
+Máquinas SNT_BR
+
+Propiedad de Grupo Santander-BCP (Unlicensed)
+Última actualización: jul 09, 2019
+Archivos adjuntosArchivos adjuntosLegacy editor
+
+
+	Descripción	Cluster IP	Dirección IP	Host Name
+
+
+HOMOLOGACIÓN
+	OFFLINE	
+-
+	172.16.237.77	
+WEB	-	172.16.237.77	
+ONLINE	-	172.16.237.76	
+
+
+
+
+PRODUCCIÓN
+	
+
+OFFLINE
+	
+
+180.239.49.81
+	180.239.49.72	srvlnxprlbr03
+180.239.49.74	srvlnxprlbr04
+WEB	180.239.49.81	180.239.49.72	srvlnxprlbr03
+180.239.49.74	srvlnxprlbr04
+
+ONLINE
+
+(acceso via OFFLINE)
+	180.188.244.149	180.188.244.151	srvlnxprlbr01
+180.188.244.150	srvlnxprlbr02
+
+
+-------------------
+
+file cabinet
+Máquinas SNCORP_BR
+
+Propiedad de Grupo Santander-BCP (Unlicensed)
+Última actualización: abr 16, 2024 por Paloma Perez Yaguee
+Archivos adjuntosArchivos adjuntos
+
+gear  Ambiente
+
+Descripción
+
+Cluster IP
+
+Dirección IP
+
+Host Name
+
+
+
+Homologación
+	
+
+OFFLINE
+	
+
+-
+	
+
+172.20.231.70
+	
+
+
+
+WEB
+	
+
+Dominio: https://lynxpjoff.santanderbr.pre.corp:8081
+	
+
+172.20.231.70
+	
+
+
+
+ONLINE
+	
+
+-
+	
+
+172.20.231.69
+	
+
+
+
+ 
+
+ 
+
+ 
+
+Producción
+	
+
+OFFLINE
+	
+
+180.239.119.226 (clegxpjprlbr02)
+	
+
+180.239.119.216
+	
+
+srvegxprlbr03
+
+180.239.119.217
+	
+
+srvegxprlbr04
+
+WEB
+	
+
+180.239.119.226 (clegxpjprlbr02)
+
+Dominio: https://lynxpjoff.santanderbr.corp:8081
+	
+
+180.239.119.216
+	
+
+srvegxprlbr03
+
+180.239.119.217
+	
+
+srvegxprlbr04
+
+ONLINE
+	
+
+180.239.119.225 (clegxpjprlbr01)
+	
+
+180.239.119.214
+	
+
+srvegxprlbr01
+
+180.239.119.215
+	
+
+srvegxprlbr02

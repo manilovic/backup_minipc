@@ -1,0 +1,15 @@
+ * Serving Flask app 'server'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.48:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 132-643-595
+192.168.1.35 - - [01/May/2025 11:06:59] "GET /buscar?q=tnt HTTP/1.1" 200 -
+192.168.1.35 - - [01/May/2025 11:06:59] code 400, message Bad request version ('÷¶\x83XIÆ1g\x91õÎGÍÑ¦ì6h¡¿ë0j\\«²æ\\\x90@Z\x99\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+192.168.1.35 - - [01/May/2025 11:06:59] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03\x9d¿ÍÕñ}k6*dÙy\x86\x04ÕFJ29\x1e,E:òO\x074v4°\x1a? ÷¶\x83XIÆ1g\x91õÎGÍÑ¦ì6h¡¿ë0j\\«²æ\\\x90@Z\x99\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+192.168.1.35 - - [01/May/2025 11:06:59] code 400, message Bad request version ('(+¦')
+192.168.1.35 - - [01/May/2025 11:06:59] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03Î\x03{do\x80\x14Å^\x01\x04&\x0d\x19\x05¶xMþyËjª¸MO¸ò8\x18ô\x9e (+¦[0m" 400 -

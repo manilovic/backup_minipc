@@ -1,0 +1,24 @@
+# Edit this file to introduce tasks to be run by cron.
+# 
+# m h  dom(day of month)  mon(month)  dow(day of week)   command
+# * * * * *  /home/minipc/Scripts/SSH_containers.sh > log2.txt 2>&1
+
+0 0 */2 * *  ~/Scripts/makemkvREG.py 
+0 4  *  * *  ~/Scripts/makemkvISO.py -d /home/minipc/Downloads/
+
+# Update Dockers
+0 3 1,15 * * ~/Scripts/update_containers.sh
+
+## Discos:
+0 2 * * * sudo /usr/bin/umount Expansion_1/
+0 2 * * * sudo /usr/bin/umount Expansion_2/
+0 9 * * * sudo /usr/bin/mount Expansion_1/
+0 9 * * * sudo /usr/bin/mount Expansion_2/
+
+## Backup
+0 2 * * * crontab -l > 1-Backup_minipc/crontab.backup
+0 3 * * * ~/Scripts/git_update.sh minipc
+
+## Update System
+0 6 * * * sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y 
+0 4 1-15 * * ~/Scripts/limpiar_logs_journal.sh
