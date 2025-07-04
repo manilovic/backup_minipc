@@ -23,7 +23,7 @@ if [ "$1" = "minipc" ]
 fi     
 
 
-rsync -a --delete Scripts/* 1-backup_"$maquina"/Scripts_backup/
+rsync -a --delete Scripts/ 1-backup_"$maquina"/Scripts_backup/
 
 
 cd 1-backup_"$maquina"/
