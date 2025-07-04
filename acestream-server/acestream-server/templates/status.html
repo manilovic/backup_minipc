@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <title>Estado de Servicios</title>
+    <style>
+        .status-dot {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .active { background-color: #4CAF50; } /* verde */
+        .inactive { background-color: #f44336; } /* rojo */
+    </style>
+</head>
+<body>
+    <h1>Estado de Servicios</h1>
+    <ul>
+        {% for name, status in services.items() %}
+            <li>{{ name }}:
+                <span class="status-dot {{ 'active' if status else 'inactive' }}"></span>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -23,7 +23,9 @@ if [ "$1" = "minipc" ]
 fi     
 
 
-rsync -a --delete Scripts/ 1-backup_"$maquina"/Scripts/
+rsync -a --delete Scripts/             1-backup_"$maquina"/Scripts/
+rsync -a --delete acestream-server     1-backup_"$maquina"/acestream-server
+rsync -a --delete acestreamserver-env  1-backup_"$maquina"/acestreamserver-env
 
 
 cd 1-backup_"$maquina"/

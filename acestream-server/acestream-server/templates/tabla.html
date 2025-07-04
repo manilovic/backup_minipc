@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registros</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #888;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<a href="/"><button>Volver a inicio</button></a>
+<body>
+    <h1>Listado de Registros</h1>
+    <table>
+        <thead>
+            <tr>
+                {% if documentos %}
+                    {% for clave in documentos[0].keys() %}
+                        <th>{{ clave }}</th>
+                    {% endfor %}
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in documentos %}
+                <tr>
+                    {% for valor in doc.values() %}
+                        <td>{{ valor }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+<a href="/"><button>Volver a inicio</button></a>
+</html>
