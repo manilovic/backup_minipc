@@ -16,8 +16,11 @@
 0 9 * * * sudo /usr/bin/mount Expansion_2/
 
 ## Backup
-0 2 * * * crontab -l > 1-Backup_minipc/crontab.backup
+0 2 * * * crontab -l > 1-backup_minipc/crontab.backup
+0 3 * * * ~/Scripts/git_update_docker.sh minipc
 0 3 * * * ~/Scripts/git_update.sh minipc
+
+
 
 ## Update System
 0 6 * * * sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y 
